@@ -301,6 +301,6 @@ public class Main extends Application {
         System.out.println(db.getInt());
         System.out.println("done");
 
-        launch(args);
+        //launch(args);
     }
 }

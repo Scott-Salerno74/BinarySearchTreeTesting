@@ -48,15 +48,27 @@ public class BinarySearchTree {
         if(current == null) {
             this.total++;
             System.out.println("Setting node");
-            //this.root = new Node(person);
+            this.root = new Node(person);
             //System.out.println(this.root.value.getLastname());
             return this.root;
         }
 
         if(person.getLastname().compareTo(current.value.getLastname()) < 0)  {
-            current.left = add(current.left, person);
+
+            if(current.left == null) {
+                // add a child as n.left
+                current.left = new Node(person);
+
+            } else {
+                current.left = add(current.left, person);
+            }
         } else if(person.getLastname().compareTo(current.value.getLastname()) > 0) {
-            current.right = add(current.right, person);
+
+            if(current.right == null) {
+                current.right = new Node(person);
+            } else {
+                current.right = add(current.right, person);
+            }
         }
         return current;
     }
