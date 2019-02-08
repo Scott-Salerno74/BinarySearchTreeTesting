@@ -1,6 +1,8 @@
-package BinaryTree;
+package Testing;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -35,6 +37,7 @@ class BinarySearchTreeTest {
     @DisplayName("Test_1")
     void test_1(){
         System.out.println("First Test");
+        Assertions.fail("The Program has Failed");
     }
     @Test
     @DisplayName("Test_2")
