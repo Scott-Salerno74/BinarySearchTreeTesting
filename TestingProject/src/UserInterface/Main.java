@@ -1,5 +1,4 @@
 package UserInterface;
-
 import DatabaseServices.CSVReader;
 import DatabaseServices.Database;
 import Models.PersonRecord;
@@ -233,7 +232,21 @@ public class Main extends Application {
         insertBox.getChildren().add(insert);
         grid.addRow(18, insertBox);
 
-         insert.setOnAction(new EventHandler<ActionEvent>() {
+        final TextField deleteUserTextField = new TextField();
+        deleteUserTextField.setPromptText("Delete user by last name...");
+        deleteUserTextField.setMaxWidth(300);
+        HBox deleteUserRow = new HBox(10);
+        deleteUserRow.getChildren().add(deleteUserTextField);
+        grid.addRow(19, deleteUserRow);
+
+        Button delete = new Button("Delete");
+        HBox deleteBox = new HBox(100);
+        deleteBox.setAlignment(Pos.BOTTOM_LEFT);
+        deleteBox.getChildren().add(delete);
+        grid.addRow(20, deleteBox);
+
+
+        insert.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
 
                  System.out.println("Inserting...");
@@ -298,9 +311,23 @@ public class Main extends Application {
         db.fillBinaryTreeWithAllRecords(records);
         System.out.println(db.getNumberOfRecordsInTree());
 
-        System.out.println(db.getInt());
+        //PersonRecord found = db.getPersonByLastName("Fumagallito");
+
+        boolean found = db.containsPersonByLastName("Plank");
+
+        if(found)
+            System.out.println("Found the person");
+        else
+            System.out.println("did not find the person");
+
+        PersonRecord p = db.getPersonByLastName("Golt");
+        System.out.println(p.getFirstName());
+
+        PersonRecord p2 = db.getPersonByLastName("Irnis");
+        System.out.println(p2.getFirstName());
+
         System.out.println("done");
 
-        launch(args);
+        // launch(args);
     }
 }

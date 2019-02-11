@@ -33,11 +33,15 @@ public class Database {
     public void fillBinaryTreeWithAllRecords(ArrayList<PersonRecord> records) {
 
         for(PersonRecord r : records) {
-            System.out.println("Adding " + r.getFirstName() + " to the tree");
+            //System.out.println("Adding " + r.getLastname() + " to the tree");
 
             dataTree.add(r);
         }
 
+    }
+
+    public boolean containsPersonByLastName(String lastName) {
+        return dataTree.contains(lastName);
     }
 
     public void insertRecordIntoTree(PersonRecord r) {
@@ -49,7 +53,4 @@ public class Database {
         return dataTree.size();
     }
 
-    public int getInt(){
-        return dataTree.total;
-    }
 }
