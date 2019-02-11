@@ -39,18 +39,34 @@ public class BinarySearchTree {
     // When the current node is null, we've reached a leaf node and can insert the new node in that position
 
     public void add(PersonRecord value) {
-        add(root, value);
+        root = add(root, value);
+        //System.out.println(this.root.value.toString());
     }
 
 
     private Node add(Node current, PersonRecord person) {
 
         if(current == null) {
-            this.total++;
-            System.out.println("Setting node");
-            this.root = new Node(person);
-            //System.out.println(this.root.value.getLastname());
-            return this.root;
+            System.out.println(person.toString());
+            return new Node(person);
+        }
+
+        int comparison = person.getLastname().compareTo(current.value.getLastname());
+
+        if(comparison < 0) {
+            current.left = add(current.left, person);
+        } else if(comparison > 0) {
+            current.right = add(current.right, person);
+        } else {
+            current.value = person;
+        }
+        return current;
+
+
+        /*
+        if(current == null) {
+            current = new Node(person);
+            return current;
         }
 
         if(person.getLastname().compareTo(current.value.getLastname()) < 0)  {
@@ -71,10 +87,16 @@ public class BinarySearchTree {
             }
         }
         return current;
+*/
     }
+
 
     public PersonRecord getPersonRecordByLastName(String n) {
         Node node = getPersonNodeByLastName(root, n);
+
+        if(node == null) {
+            System.out.println("THE PERSON IS NULL");
+        }
 
         String id = node.value.getId();
         String firstName = node.value.getFirstName();
@@ -91,18 +113,19 @@ public class BinarySearchTree {
     }
 
     private Node getPersonNodeByLastName(Node root, String lastName) {
+
         if(root == null) {
-            return root;
+            System.out.println("in if");
+            return null;
         }
 
-        if(root.value.getLastname().equals(lastName)) {
+        int comparison = lastName.compareTo(root.value.getLastname());
+        if(comparison < 0) {
+            return getPersonNodeByLastName(root.left, lastName);
+        } else if(comparison > 0) {
+            return getPersonNodeByLastName(root.right, lastName);
+        } else {
             return root;
-        }
-
-        if(root.value.getLastname().compareTo(lastName) < 0) { // val is greater than the root's last name value
-            return getPersonNodeByLastName(root.right, lastName);
-        } else { // less than the roots value
-            return getPersonNodeByLastName(root.right, lastName);
         }
     }
 

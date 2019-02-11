@@ -312,9 +312,11 @@ public class Main extends Application {
         db.fillBinaryTreeWithAllRecords(records);
         System.out.println(db.getNumberOfRecordsInTree());
 
-        System.out.println(db.getInt());
+        PersonRecord found = db.getPersonByLastName("Fumagallito");
+
+
         System.out.println("done");
 
-        launch(args);
+        // launch(args);
     }
 }
