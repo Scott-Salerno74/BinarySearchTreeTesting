@@ -40,6 +40,10 @@ public class Database {
 
     }
 
+    public boolean containsPersonByLastName(String lastName) {
+        return dataTree.contains(lastName);
+    }
+
     public void insertRecordIntoTree(PersonRecord r) {
         dataTree.add(r);
     }
@@ -49,7 +53,4 @@ public class Database {
         return dataTree.size();
     }
 
-    public int getInt(){
-        return dataTree.total;
-    }
 }

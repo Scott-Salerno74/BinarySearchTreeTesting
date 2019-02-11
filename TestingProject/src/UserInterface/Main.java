@@ -1,5 +1,4 @@
 package UserInterface;
-
 import DatabaseServices.CSVReader;
 import DatabaseServices.Database;
 import Models.PersonRecord;
@@ -312,8 +311,20 @@ public class Main extends Application {
         db.fillBinaryTreeWithAllRecords(records);
         System.out.println(db.getNumberOfRecordsInTree());
 
-        PersonRecord found = db.getPersonByLastName("Fumagallito");
+        //PersonRecord found = db.getPersonByLastName("Fumagallito");
 
+        boolean found = db.containsPersonByLastName("Plank");
+
+        if(found)
+            System.out.println("Found the person");
+        else
+            System.out.println("did not find the person");
+
+        PersonRecord p = db.getPersonByLastName("Golt");
+        System.out.println(p.getFirstName());
+
+        PersonRecord p2 = db.getPersonByLastName("Irnis");
+        System.out.println(p2.getFirstName());
 
         System.out.println("done");
 

@@ -28,7 +28,7 @@ public class PersonRecord {
         return this.firstName;
     }
 
-    public String getLastname() {
+    public String getLastName() {
         return this.lastName;
     }
 
