@@ -5,7 +5,7 @@ Things to make sure of if project isn't running
 
 1. Make sure that 'src' folder is marked as root
    - Right click TestingProject/src > 'Mark directory as Root'
-2. Need to explicitly create an 'out' folderi
+2. Need to explicitly create an 'out' folder
    - mkdir TestingProject/out
    - File > Project Structure > Project
        - Project SDK -> 1.8
