@@ -95,6 +95,7 @@ public class BinarySearchTree {
 
         if(node == null) {
             System.out.println("THE PERSON IS NULL");
+            return null; //so we can catch this in Database class
         }
 
         String id = node.value.getId();
