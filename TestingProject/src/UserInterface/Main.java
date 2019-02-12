@@ -1,5 +1,4 @@
 package UserInterface;
-
 import DatabaseServices.CSVReader;
 import DatabaseServices.Database;
 import Models.PersonRecord;
@@ -99,16 +98,7 @@ public class Main extends Application {
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 6);
 
-        searchBtn.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                actiontarget.setFill(Color.FIREBRICK);
-                actiontarget.setText("Search button pressed");
-                String searchText = userTextField.getText();
-                //PersonRecord personToSearch = db.getPersonByLastName(searchText));
-                System.out.println("User is seraching for " + searchText );
 
-            }
-        });
 
         clearBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -122,17 +112,21 @@ public class Main extends Application {
 
 ///////////////
 
-        TableView table = new TableView();
+        final TableView table = new TableView();
 
         final Label label = new Label("Search Results");
         label.setFont(new Font("Arial", 20));
 
         table.setEditable(true);
 
-        TableColumn firstNameCol = new TableColumn("First Name");
+        final TableColumn firstNameCol = new TableColumn("First Name");
         TableColumn lastNameCol = new TableColumn("Last Name");
+        TableColumn emailCol = new TableColumn("Email");
+        TableColumn companyCol = new TableColumn("Company");
+        TableColumn jobTitleCol = new TableColumn("Job Title");
+        TableColumn universityCol =  new TableColumn("Uni");
 
-        table.getColumns().addAll(firstNameCol, lastNameCol);
+        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol, companyCol, jobTitleCol, universityCol);
 
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
@@ -148,6 +142,32 @@ public class Main extends Application {
         hbBtn2.getChildren().addAll(clearTableBtn);
 
         grid.add(hbBtn2, 0, 6);
+
+
+        searchBtn.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                actiontarget.setFill(Color.FIREBRICK);
+                actiontarget.setText("Search button pressed");
+                String searchText = userTextField.getText();
+                //PersonRecord personToSearch = db.getPersonByLastName(searchText));
+                System.out.println("User is seraching for " + searchText );
+                PersonRecord found = db.getPersonByLastName(searchText);
+                System.out.println(found.getFirstName());
+
+                //firstNameCol.setCellFactory(found.getFirstName());
+/*
+                table.getColumns().set(0, found.getFirstName());
+                table.getColumns().set(1, found.getLastName());
+                table.getColumns().set(2, found.getCompany());
+                table.getColumns().set(3, found.getEmail());
+                table.getColumns().set(4, found.getJobTitle());
+                table.getColumns().set(5, found.getUniversity());
+*/
+
+
+            }
+        });
+
 
         ///////////////
 
@@ -173,7 +193,7 @@ public class Main extends Application {
                         break;
                     case 3:
                         choice = "Company";
-                        userTextField.setPromptText("Communist New Network...");
+                        userTextField.setPromptText("Communist News Network...");
                         break;
                     case 4:
                         choice = "Job Title";
@@ -233,7 +253,21 @@ public class Main extends Application {
         insertBox.getChildren().add(insert);
         grid.addRow(18, insertBox);
 
-         insert.setOnAction(new EventHandler<ActionEvent>() {
+        final TextField deleteUserTextField = new TextField();
+        deleteUserTextField.setPromptText("Delete user by last name...");
+        deleteUserTextField.setMaxWidth(300);
+        HBox deleteUserRow = new HBox(10);
+        deleteUserRow.getChildren().add(deleteUserTextField);
+        grid.addRow(19, deleteUserRow);
+
+        Button delete = new Button("Delete");
+        HBox deleteBox = new HBox(100);
+        deleteBox.setAlignment(Pos.BOTTOM_LEFT);
+        deleteBox.getChildren().add(delete);
+        grid.addRow(20, deleteBox);
+
+
+        insert.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
 
                  System.out.println("Inserting...");
@@ -298,7 +332,24 @@ public class Main extends Application {
         db.fillBinaryTreeWithAllRecords(records);
         System.out.println(db.getNumberOfRecordsInTree());
 
-        System.out.println(db.getInt());
+        //PersonRecord found = db.getPersonByLastName("Fumagallito");
+
+        boolean found = db.containsPersonByLastName("Plank");
+
+        if(found)
+            System.out.println("Found the person");
+        else
+            System.out.println("did not find the person");
+
+        PersonRecord p1 = db.getPersonByLastName("Plank");
+        System.out.println(p1.getFirstName());
+
+        PersonRecord p2 = db.getPersonByLastName("Golt");
+        System.out.println(p2.getFirstName());
+
+        PersonRecord p3 = db.getPersonByLastName("Irnis");
+        System.out.println(p3.getFirstName());
+
         System.out.println("done");
 
         launch(args);

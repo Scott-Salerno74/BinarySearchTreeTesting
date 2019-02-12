@@ -7,12 +7,10 @@ public class BinarySearchTree {
 
     Node root;
 
-    public int total;
     // store people by last name
 
     public BinarySearchTree() {
         root = null;
-        this.total = 0;
     }
 
     public boolean isEmpty() {
@@ -39,34 +37,70 @@ public class BinarySearchTree {
     // When the current node is null, we've reached a leaf node and can insert the new node in that position
 
     public void add(PersonRecord value) {
-        add(root, value);
+        root = add(root, value);
+        //System.out.println(this.root.value.toString());
     }
 
 
     private Node add(Node current, PersonRecord person) {
 
         if(current == null) {
-            this.total++;
-            System.out.println("Setting node");
-            //this.root = new Node(person);
-            //System.out.println(this.root.value.getLastname());
-            return this.root;
+            //System.out.println("Add");
+            //System.out.println(person.toString());
+            return new Node(person);
+        }
+
+        int comparison = person.getLastName().compareTo(current.value.getLastName());
+
+        if(comparison < 0) {
+            current.left = add(current.left, person);
+        } else if(comparison > 0) {
+            current.right = add(current.right, person);
+        } else {
+            current.value = person;
+        }
+        return current;
+
+
+        /*
+        if(current == null) {
+            current = new Node(person);
+            return current;
         }
 
         if(person.getLastname().compareTo(current.value.getLastname()) < 0)  {
-            current.left = add(current.left, person);
+
+            if(current.left == null) {
+                // add a child as n.left
+                current.left = new Node(person);
+
+            } else {
+                current.left = add(current.left, person);
+            }
         } else if(person.getLastname().compareTo(current.value.getLastname()) > 0) {
-            current.right = add(current.right, person);
+
+            if(current.right == null) {
+                current.right = new Node(person);
+            } else {
+                current.right = add(current.right, person);
+            }
         }
         return current;
+*/
     }
+
 
     public PersonRecord getPersonRecordByLastName(String n) {
         Node node = getPersonNodeByLastName(root, n);
 
+        if(node == null) {
+            System.out.println("THE PERSON IS NULL");
+            return null; //so we can catch this in Database class
+        }
+
         String id = node.value.getId();
         String firstName = node.value.getFirstName();
-        String lastName = node.value.getLastname();
+        String lastName = node.value.getLastName();
         String email = node.value.getEmail();
         String company = node.value.getCompany();
         String jobTitle= node.value.getJobTitle();
@@ -79,43 +113,43 @@ public class BinarySearchTree {
     }
 
     private Node getPersonNodeByLastName(Node root, String lastName) {
+
         if(root == null) {
-            return root;
+            System.out.println("in if");
+            return null;
         }
 
-        if(root.value.getLastname().equals(lastName)) {
+        int comparison = lastName.compareTo(root.value.getLastName());
+        if(comparison < 0) {
+            return getPersonNodeByLastName(root.left, lastName);
+        } else if(comparison > 0) {
+            return getPersonNodeByLastName(root.right, lastName);
+        } else {
             return root;
-        }
-
-        if(root.value.getLastname().compareTo(lastName) < 0) { // val is greater than the root's last name value
-            return getPersonNodeByLastName(root.right, lastName);
-        } else { // less than the roots value
-            return getPersonNodeByLastName(root.right, lastName);
         }
     }
 
 // get all nodes
 
-    public boolean contains(PersonRecord value) {
-        return contains(root, value);
+    public boolean contains(String lastName) {
+        return contains(root, lastName);
     }
 
-    private boolean contains(Node current, PersonRecord personToFind) {
-        if(current == null) {
-            return false;
-        }
+    private boolean contains(Node current, String lastName) {
 
-        if(personToFind.getLastname().equals(current.value.getLastname())) {
+        if(current == null)
+            return false;
+
+        int comparison = lastName.compareTo(root.value.getLastName());
+
+        if(comparison < 0) {
+            return contains(current.left, lastName);
+        } else if(comparison > 0) {
+            return contains(current.right, lastName);
+        } else {
             return true;
         }
 
-        if(personToFind.getLastname().compareTo(current.value.getLastname()) < 0) { // current nodes value is less than the key we are looking for
-            contains(current.left, personToFind);
-        } else {
-            contains(current.right, personToFind);
-        }
-
-        return false;
     }
 
 }

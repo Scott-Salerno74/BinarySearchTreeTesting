@@ -10,7 +10,7 @@ public class Node {
     Node left;
     Node right;
 
-    Node(PersonRecord value) {
+    public Node(PersonRecord value) {
         this.value = value;
         this.right = null;
         this.left = null;
