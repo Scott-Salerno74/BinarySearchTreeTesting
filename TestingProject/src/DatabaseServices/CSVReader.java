@@ -17,7 +17,10 @@ public class CSVReader {
 
     public ArrayList<PersonRecord> getAllDataFromCSVFile() {
 
-        String csvFile = "/home/LVC/kdm004/IdeaProjects/BinarySearchTreeTesting/TestingProject/src/DatabaseServices/MOCK_DATA.csv";
+        String fileForLogan = "/home/logan/BinarySearchTreeTesting/TestingProject/src/DatabaseServices/MOCK_DATA.csv";
+        String fileForKurt = "/home/LVC/kdm004/IdeaProjects/BinarySearchTreeTesting/TestingProject/src/DatabaseServices/MOCK_DATA.csv";
+
+        String csvFile = fileForLogan;
         BufferedReader reader = null;
         String line = "";
         String cvsSplitBy = ",";
