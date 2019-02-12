@@ -105,6 +105,9 @@ public class Main extends Application {
                 String searchText = userTextField.getText();
                 //PersonRecord personToSearch = db.getPersonByLastName(searchText));
                 System.out.println("User is seraching for " + searchText );
+                PersonRecord found = db.getPersonByLastName(searchText);
+                System.out.println(found.getFirstName());
+
 
             }
         });
@@ -320,14 +323,17 @@ public class Main extends Application {
         else
             System.out.println("did not find the person");
 
-        PersonRecord p = db.getPersonByLastName("Golt");
-        System.out.println(p.getFirstName());
+        PersonRecord p1 = db.getPersonByLastName("Plank");
+        System.out.println(p1.getFirstName());
 
-        PersonRecord p2 = db.getPersonByLastName("Irnis");
+        PersonRecord p2 = db.getPersonByLastName("Golt");
         System.out.println(p2.getFirstName());
+
+        PersonRecord p3 = db.getPersonByLastName("Irnis");
+        System.out.println(p3.getFirstName());
 
         System.out.println("done");
 
-        // launch(args);
+        launch(args);
     }
 }

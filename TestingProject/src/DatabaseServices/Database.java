@@ -26,6 +26,10 @@ public class Database {
     public PersonRecord getPersonByLastName(String lastName) {
         PersonRecord  personToReturn = dataTree.getPersonRecordByLastName(lastName);
 
+        if(personToReturn == null) {
+            System.out.println("NULL FROM SEARCH!!!");
+        }
+
         return personToReturn;
 
     }
