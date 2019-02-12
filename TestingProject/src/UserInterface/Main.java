@@ -121,22 +121,22 @@ public class Main extends Application {
 
         table.setEditable(true);
 
-        TableColumn<PersonRecord, String> firstNameCol = new TableColumn<PersonRecord, String>("First Name");
+        final TableColumn<PersonRecord, String> firstNameCol = new TableColumn<PersonRecord, String>("First Name");
         firstNameCol.setCellValueFactory(new PropertyValueFactory("firstName"));
 
-        TableColumn<PersonRecord, String> lastNameCol = new TableColumn<PersonRecord, String>("Last Name");
+        final TableColumn<PersonRecord, String> lastNameCol = new TableColumn<PersonRecord, String>("Last Name");
         lastNameCol.setCellValueFactory(new PropertyValueFactory("lastName"));
 
-        TableColumn<PersonRecord, String> emailCol = new TableColumn<PersonRecord, String>("Email");
+        final TableColumn<PersonRecord, String> emailCol = new TableColumn<PersonRecord, String>("Email");
         emailCol.setCellValueFactory(new PropertyValueFactory("email"));
 
-        TableColumn<PersonRecord, String> companyCol = new TableColumn<PersonRecord, String>("Company");
+        final TableColumn<PersonRecord, String> companyCol = new TableColumn<PersonRecord, String>("Company");
         companyCol.setCellValueFactory(new PropertyValueFactory("company"));
 
-        TableColumn<PersonRecord, String> jobTitleCol = new TableColumn<PersonRecord, String>("Job Title");
+        final TableColumn<PersonRecord, String> jobTitleCol = new TableColumn<PersonRecord, String>("Job Title");
         jobTitleCol.setCellValueFactory(new PropertyValueFactory("jobTitle"));
 
-        TableColumn<PersonRecord, String> universityCol =  new TableColumn<PersonRecord, String>("Uni");
+        final TableColumn<PersonRecord, String> universityCol =  new TableColumn<PersonRecord, String>("Uni");
         universityCol.setCellValueFactory(new PropertyValueFactory("university"));
 
         table.getColumns().addAll(firstNameCol, lastNameCol, emailCol, companyCol, jobTitleCol, universityCol);
@@ -156,6 +156,12 @@ public class Main extends Application {
 
         grid.add(hbBtn2, 0, 6);
 
+        clearTableBtn.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                table.getItems().clear();
+            }
+        });
+
 
         searchBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -167,6 +173,9 @@ public class Main extends Application {
                 PersonRecord found = db.getPersonByLastName(searchText);
                 System.out.println(found.getFirstName());
                 System.out.println(found.toString());
+
+                userTextField.clear();
+                searchFilter.getSelectionModel().select(1);
 
                 table.getItems().add(found);
 
@@ -276,12 +285,29 @@ public class Main extends Application {
              public void handle(ActionEvent event) {
 
                  System.out.println("Inserting...");
+
+                 String id = Integer.toString(db.getNumberOfRecordsInTree() + 1);
+                 String firstName = firstNameTextField.getText();
+                 String lastName = lastNameTextField.getText();
+                 String email = emailTextField.getText();
+                 String company = companyTextField.getText();
+                 String jobTitle= jobTitleTextField.getText();
+                 String university = universityTextField.getText();
+
+                 PersonRecord toAdd = new PersonRecord(id, firstName, lastName, email, company, jobTitle, university);
+                 System.out.println("Inserting record into tree: " + toAdd.toString());
+
+
+
+
                  firstNameTextField.clear();
                  lastNameTextField.clear();
                  emailTextField.clear();
                  companyTextField.clear();
                  jobTitleTextField.clear();
                  universityTextField.clear();
+
+                 db.insertRecordIntoTree(toAdd);
 
              }
          });
