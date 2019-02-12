@@ -1,22 +1,12 @@
 package MockingTests;
 
-import DatabaseServices.Database;
-import org.junit.Rule;
-import org.junit.Test;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.MockitoRule;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.
 
+@ExtendWith(MockitoExtension.class)
 public class MockitoTest {
 
-    @Mock
-    Database databaseMock;
 
-    @Rule public MockitoRule mockitoRule = MockitoJUnit.rule();
-
-    @Test
-    public void testQuery() {
-
-    }
 
 }
