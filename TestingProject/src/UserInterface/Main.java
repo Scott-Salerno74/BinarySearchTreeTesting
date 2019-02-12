@@ -14,6 +14,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -113,18 +114,30 @@ public class Main extends Application {
 ///////////////
 
         final TableView table = new TableView();
+        table.setMinHeight(150);
 
         final Label label = new Label("Search Results");
         label.setFont(new Font("Arial", 20));
 
         table.setEditable(true);
 
-        final TableColumn firstNameCol = new TableColumn("First Name");
-        TableColumn lastNameCol = new TableColumn("Last Name");
-        TableColumn emailCol = new TableColumn("Email");
-        TableColumn companyCol = new TableColumn("Company");
-        TableColumn jobTitleCol = new TableColumn("Job Title");
-        TableColumn universityCol =  new TableColumn("Uni");
+        final TableColumn<PersonRecord, String> firstNameCol = new TableColumn<PersonRecord, String>("First Name");
+        firstNameCol.setCellValueFactory(new PropertyValueFactory("firstName"));
+
+        final TableColumn<PersonRecord, String> lastNameCol = new TableColumn<PersonRecord, String>("Last Name");
+        lastNameCol.setCellValueFactory(new PropertyValueFactory("lastName"));
+
+        final TableColumn<PersonRecord, String> emailCol = new TableColumn<PersonRecord, String>("Email");
+        emailCol.setCellValueFactory(new PropertyValueFactory("email"));
+
+        final TableColumn<PersonRecord, String> companyCol = new TableColumn<PersonRecord, String>("Company");
+        companyCol.setCellValueFactory(new PropertyValueFactory("company"));
+
+        final TableColumn<PersonRecord, String> jobTitleCol = new TableColumn<PersonRecord, String>("Job Title");
+        jobTitleCol.setCellValueFactory(new PropertyValueFactory("jobTitle"));
+
+        final TableColumn<PersonRecord, String> universityCol =  new TableColumn<PersonRecord, String>("Uni");
+        universityCol.setCellValueFactory(new PropertyValueFactory("university"));
 
         table.getColumns().addAll(firstNameCol, lastNameCol, emailCol, companyCol, jobTitleCol, universityCol);
 
@@ -143,6 +156,12 @@ public class Main extends Application {
 
         grid.add(hbBtn2, 0, 6);
 
+        clearTableBtn.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                table.getItems().clear();
+            }
+        });
+
 
         searchBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -150,20 +169,15 @@ public class Main extends Application {
                 actiontarget.setText("Search button pressed");
                 String searchText = userTextField.getText();
                 //PersonRecord personToSearch = db.getPersonByLastName(searchText));
-                System.out.println("User is seraching for " + searchText );
+                System.out.println("User is searching for " + searchText );
                 PersonRecord found = db.getPersonByLastName(searchText);
                 System.out.println(found.getFirstName());
+                System.out.println(found.toString());
 
-                //firstNameCol.setCellFactory(found.getFirstName());
-/*
-                table.getColumns().set(0, found.getFirstName());
-                table.getColumns().set(1, found.getLastName());
-                table.getColumns().set(2, found.getCompany());
-                table.getColumns().set(3, found.getEmail());
-                table.getColumns().set(4, found.getJobTitle());
-                table.getColumns().set(5, found.getUniversity());
-*/
+                userTextField.clear();
+                searchFilter.getSelectionModel().select(1);
 
+                table.getItems().add(found);
 
             }
         });
@@ -271,12 +285,29 @@ public class Main extends Application {
              public void handle(ActionEvent event) {
 
                  System.out.println("Inserting...");
+
+                 String id = Integer.toString(db.getNumberOfRecordsInTree() + 1);
+                 String firstName = firstNameTextField.getText();
+                 String lastName = lastNameTextField.getText();
+                 String email = emailTextField.getText();
+                 String company = companyTextField.getText();
+                 String jobTitle= jobTitleTextField.getText();
+                 String university = universityTextField.getText();
+
+                 PersonRecord toAdd = new PersonRecord(id, firstName, lastName, email, company, jobTitle, university);
+                 System.out.println("Inserting record into tree: " + toAdd.toString());
+
+
+
+
                  firstNameTextField.clear();
                  lastNameTextField.clear();
                  emailTextField.clear();
                  companyTextField.clear();
                  jobTitleTextField.clear();
                  universityTextField.clear();
+
+                 db.insertRecordIntoTree(toAdd);
 
              }
          });
