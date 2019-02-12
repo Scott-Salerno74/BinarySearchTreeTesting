@@ -98,19 +98,7 @@ public class Main extends Application {
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 6);
 
-        searchBtn.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                actiontarget.setFill(Color.FIREBRICK);
-                actiontarget.setText("Search button pressed");
-                String searchText = userTextField.getText();
-                //PersonRecord personToSearch = db.getPersonByLastName(searchText));
-                System.out.println("User is seraching for " + searchText );
-                PersonRecord found = db.getPersonByLastName(searchText);
-                System.out.println(found.getFirstName());
 
-
-            }
-        });
 
         clearBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
@@ -124,17 +112,21 @@ public class Main extends Application {
 
 ///////////////
 
-        TableView table = new TableView();
+        final TableView table = new TableView();
 
         final Label label = new Label("Search Results");
         label.setFont(new Font("Arial", 20));
 
         table.setEditable(true);
 
-        TableColumn firstNameCol = new TableColumn("First Name");
+        final TableColumn firstNameCol = new TableColumn("First Name");
         TableColumn lastNameCol = new TableColumn("Last Name");
+        TableColumn emailCol = new TableColumn("Email");
+        TableColumn companyCol = new TableColumn("Company");
+        TableColumn jobTitleCol = new TableColumn("Job Title");
+        TableColumn universityCol =  new TableColumn("Uni");
 
-        table.getColumns().addAll(firstNameCol, lastNameCol);
+        table.getColumns().addAll(firstNameCol, lastNameCol, emailCol, companyCol, jobTitleCol, universityCol);
 
         final VBox vbox = new VBox();
         vbox.setSpacing(5);
@@ -150,6 +142,32 @@ public class Main extends Application {
         hbBtn2.getChildren().addAll(clearTableBtn);
 
         grid.add(hbBtn2, 0, 6);
+
+
+        searchBtn.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                actiontarget.setFill(Color.FIREBRICK);
+                actiontarget.setText("Search button pressed");
+                String searchText = userTextField.getText();
+                //PersonRecord personToSearch = db.getPersonByLastName(searchText));
+                System.out.println("User is seraching for " + searchText );
+                PersonRecord found = db.getPersonByLastName(searchText);
+                System.out.println(found.getFirstName());
+
+                //firstNameCol.setCellFactory(found.getFirstName());
+/*
+                table.getColumns().set(0, found.getFirstName());
+                table.getColumns().set(1, found.getLastName());
+                table.getColumns().set(2, found.getCompany());
+                table.getColumns().set(3, found.getEmail());
+                table.getColumns().set(4, found.getJobTitle());
+                table.getColumns().set(5, found.getUniversity());
+*/
+
+
+            }
+        });
+
 
         ///////////////
 
@@ -175,7 +193,7 @@ public class Main extends Application {
                         break;
                     case 3:
                         choice = "Company";
-                        userTextField.setPromptText("Communist New Network...");
+                        userTextField.setPromptText("Communist News Network...");
                         break;
                     case 4:
                         choice = "Job Title";
