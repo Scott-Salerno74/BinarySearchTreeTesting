@@ -12,32 +12,35 @@ import org.junit.jupiter.api.Test;
 class BinarySearchTreeTest {
     private BinarySearchTree BST = new BinarySearchTree();
     private PersonRecord pR = new PersonRecord("101", "Scott", "Salerno", "sws001@lvc.edu", "G-unit", "Manager", "LVC");
-    private PersonRecord pR2 = new PersonRecord("101", "Scott", "Robinson", "sws001@lvc.edu", "Corrections", "Manager", "LVC");
+    private PersonRecord pR2 = new PersonRecord("102", "Scott", "Robinson", "swr001@lvc.edu", "Corrections", "SSGT", "LVC");
 
-//    @org.junit.jupiter.api.Test
-//    void isEmpty() {
-//        System.out.println("The BST is empty.");
-//    }
-//
-//    @org.junit.jupiter.api.Test
-//    void size() {
-//        System.out.println("The Size of The BST was Asked For.");
-//    }
-//
-//    @org.junit.jupiter.api.Test
-//    void add() {
-//        System.out.println("Something was Added to our BST.");
-//    }
-//
-//    @org.junit.jupiter.api.Test
-//    void getPersonRecordByLastName() {
-//        System.out.println("The BST is being searched for a Last Name.");
-//    }
+    /**
+     * Practice Tests.
+     */
+    @org.junit.jupiter.api.Test
+    void isEmpty() {
+        System.out.println("The BST is empty.");
+    }
 
-    //    @org.junit.jupiter.api.Test
-//    void contains() {
-//        System.out.println("The BST contains all of these nodes.");
-//    }
+    @org.junit.jupiter.api.Test
+    void size() {
+        System.out.println("The Size of The BST was Asked For.");
+    }
+
+    @org.junit.jupiter.api.Test
+    void add() {
+        System.out.println("Something was Added to our BST.");
+    }
+
+    @org.junit.jupiter.api.Test
+    void getPersonRecordByLastName() {
+        System.out.println("The BST is being searched for a Last Name.");
+    }
+
+        @org.junit.jupiter.api.Test
+    void contains() {
+        System.out.println("The BST contains all of these nodes.");
+    }
     /**
      * This Test tests the Addition Method
      * Update 2/12/19 : Addition is Working
