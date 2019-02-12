@@ -38,6 +38,10 @@ class BinarySearchTreeTest {
 //    void contains() {
 //        System.out.println("The BST contains all of these nodes.");
 //    }
+    /**
+     * This Test tests the Addition Method
+     * Update 2/12/19 : Addition is Working
+     */
     @Test
     @DisplayName("Addition_Test")
     void test_1() {
@@ -46,17 +50,25 @@ class BinarySearchTreeTest {
         System.out.println(pR.getFirstName() + " " + pR.getLastName());
         assertFalse(BST.isEmpty());
         assertNotEquals(BST.getPersonRecordByLastName("Salerno"), BST.getPersonRecordByLastName("Salerno"));
+        System.out.println("Addition Works !!!");
 
 
     }
 
+    /**
+     * This Test is To test the Contains Method
+     * Update 2/12/19 Contains Does not show the top most element in our BST
+     */
+
     @Test
     @DisplayName("Contains_Test")
     void test_2(){
-        System.out.println("TestingContains");
+        System.out.println("TestingContains:");
         BST.add(pR);
         BST.add(pR2);
-        assertFalse(BST.contains("Robinson"));
+        assertTrue(BST.contains("Robinson"),"Robinson is not found in the BST: " + " It is The Newest Node to be added to the Tree");
+        assertTrue(BST.contains("Salerno"),"Salerno is not found in the BST: "+ " It is the First Node Placed in the Tree");
+        System.out.println("Contains Works !!!");
     }
 
 }
