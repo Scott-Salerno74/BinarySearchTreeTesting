@@ -22,6 +22,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
@@ -302,11 +304,14 @@ public class Main extends Application {
     }
 
 
-    public static void main(String[] args) {
+    static Logger logger = LogManager.getLogger(Main.class);
 
+    public static void main(String[] args) {
         db = new Database();
         CSVReader reader = new CSVReader();
         ArrayList<PersonRecord> records = reader.getAllDataFromCSVFile();
+
+        logger.info("This is information...");
         //System.out.println(records.size());
         db.fillBinaryTreeWithAllRecords(records);
         System.out.println(db.getNumberOfRecordsInTree());
@@ -315,10 +320,14 @@ public class Main extends Application {
 
         boolean found = db.containsPersonByLastName("Plank");
 
-        if(found)
+        if(found) {
             System.out.println("Found the person");
-        else
+            logger.info("Found the person.");
+        }
+        else {
             System.out.println("did not find the person");
+            logger.info("Did not find the person.");
+        }
 
         PersonRecord p = db.getPersonByLastName("Golt");
         System.out.println(p.getFirstName());
