@@ -28,8 +28,8 @@ Once Maven downloads the dependencies, they will be located at 'External Librari
 All of the dependencies should be located under 'External Libraries'
 
 ## Using JUnit in intelliJ
-With Intellij, J-unit 5 is available withthe newest Version. I Used JUnit 5 to conduct my Tests, However we imported Junit 4.2 from our Pom.xml.
-To Create a Test in IntelliJ, You must click on the name of the class You are looking to test. Once it is Highlighted, Press Alt+Enter and you are given the Option to create a test. From There you create a test with the testing material you want and for us it was Junit. 
+With Intellij, J-unit 5 is available with the newest Version. I Used JUnit 5 to conduct my Tests, However we imported Junit 4.2 from our Pom.xml.
+To Create a Test in IntelliJ, You must click on the name of the class You are looking to test. Once it is Highlighted, Press Alt+Enter and you are given the option to create a test. From there you create a test with the testing material you want and for us it was Junit. 
 From There You import the Junit material and go ahead. 
 Assertions in Junit help to find problems when testing the code.
 
