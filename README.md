@@ -15,7 +15,7 @@ Things to make sure of if project isn't running
 
 ## Opening the project for the first time
 
-Intellij > File > Open > TestingProjec (If BinarySearchTreeTesting is the root folder in the project explorer, the project probably won't work)
+Intellij > File > Open > TestingProject (If BinarySearchTreeTesting is the root folder in the project explorer, the project probably won't work)
 
 File > Project Structure 
 - In the 'Sources' Tab, make sure that on the right side of  the screen, 'src' and 'Resources' are listed under 'Source Folders'
