@@ -1,9 +1,13 @@
 package BinaryTree;
 
 import Models.PersonRecord;
+import UserInterface.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class BinarySearchTree {
 
+    static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     Node root;
 
@@ -23,6 +27,7 @@ public class BinarySearchTree {
 
     private int size(Node node) {
         if(node == null) {
+            logger.debug("The tree is empty");
             return 0;
         } else {
             return(size(node.left) + 1 + size(node.right));
@@ -30,23 +35,19 @@ public class BinarySearchTree {
     }
 
     // We want to keep the tree sorted
-
-
     // If the new node's value is lower than the current node, go to the left child
     // If the new node's value is greater than the current node, go to the right child
     // When the current node is null, we've reached a leaf node and can insert the new node in that position
 
     public void add(PersonRecord value) {
         root = add(root, value);
-        //System.out.println(this.root.value.toString());
     }
 
 
     private Node add(Node current, PersonRecord person) {
 
         if(current == null) {
-            //System.out.println("Add");
-            //System.out.println(person.toString());
+            logger.info("In BinarySearchTree.java, in base case for add()");
             return new Node(person);
         }
 
@@ -61,32 +62,6 @@ public class BinarySearchTree {
         }
         return current;
 
-
-        /*
-        if(current == null) {
-            current = new Node(person);
-            return current;
-        }
-
-        if(person.getLastname().compareTo(current.value.getLastname()) < 0)  {
-
-            if(current.left == null) {
-                // add a child as n.left
-                current.left = new Node(person);
-
-            } else {
-                current.left = add(current.left, person);
-            }
-        } else if(person.getLastname().compareTo(current.value.getLastname()) > 0) {
-
-            if(current.right == null) {
-                current.right = new Node(person);
-            } else {
-                current.right = add(current.right, person);
-            }
-        }
-        return current;
-*/
     }
 
 
@@ -94,7 +69,7 @@ public class BinarySearchTree {
         Node node = getPersonNodeByLastName(root, n);
 
         if(node == null) {
-            System.out.println("THE PERSON IS NULL");
+            logger.debug("In BinarySearchTree.java, person record is null");
             return null; //so we can catch this in Database class
         }
 
@@ -115,7 +90,6 @@ public class BinarySearchTree {
     private Node getPersonNodeByLastName(Node root, String lastName) {
 
         if(root == null) {
-            System.out.println("in if");
             return null;
         }
 
@@ -128,8 +102,6 @@ public class BinarySearchTree {
             return root;
         }
     }
-
-// get all nodes
 
     public boolean contains(String lastName) {
         return contains(root, lastName);
@@ -149,7 +121,5 @@ public class BinarySearchTree {
         } else {
             return true;
         }
-
     }
-
 }

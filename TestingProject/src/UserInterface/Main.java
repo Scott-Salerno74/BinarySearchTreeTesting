@@ -209,8 +209,7 @@ public class Main extends Application {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Search button pressed");
                 String searchText = userTextField.getText();
-                //PersonRecord personToSearch = db.getPersonByLastName(searchText));
-                System.out.println("User is searching for " + searchText );
+                logger.info("User is searching for {} ", searchText);
 
                 PersonRecord found = db.getPersonByLastName(searchText);
 
@@ -237,7 +236,6 @@ public class Main extends Application {
         searchFilter.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 int selectedIndex = searchFilter.getSelectionModel().getSelectedIndex();
-                //String choice = (String) searchFilter.getItems().get(selectedIndex);
 
                 String choice = "";
 
@@ -269,19 +267,11 @@ public class Main extends Application {
                 }
 
                 System.out.println(choice);
-
-                // first name, last name, e-mail, company, job title, university
-
-                // userTextField.setPromptText("");
-
             }
         });
 
-
         insert.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
-
-                 System.out.println("Inserting...");
 
                  String id = Integer.toString(db.getNumberOfRecordsInTree() + 1);
                  String firstName = firstNameTextField.getText();
@@ -292,7 +282,7 @@ public class Main extends Application {
                  String university = universityTextField.getText();
 
                  PersonRecord toAdd = new PersonRecord(id, firstName, lastName, email, company, jobTitle, university);
-                 System.out.println("Inserting record into tree: " + toAdd.toString());
+                 logger.info("Inserting record into tree: {} ", toAdd.toString());
 
                  firstNameTextField.clear();
                  lastNameTextField.clear();
@@ -316,31 +306,32 @@ public class Main extends Application {
         db = new Database();
         CSVReader reader = new CSVReader();
         ArrayList<PersonRecord> records = reader.getAllDataFromCSVFile();
-        //System.out.println(records.size());
         db.fillBinaryTreeWithAllRecords(records);
-        System.out.println(db.getNumberOfRecordsInTree());
 
-        //PersonRecord found = db.getPersonByLastName("Fumagallito");
+        logger.debug("Binary Tree has {} entries", db.getNumberOfRecordsInTree());
+
+        PersonRecord foundError = db.getPersonByLastName("Fumagallito");
+
+        if(foundError == null) {
+            logger.debug("Object is NULL");
+        }
 
         boolean found = db.containsPersonByLastName("Plank");
 
         if(found)
-            System.out.println("Found the person");
-        else
-            System.out.println("did not find the person");
+            logger.info("Found the person");
+        else {
+            logger.error("Did not find person!");
+        }
 
         PersonRecord p1 = db.getPersonByLastName("Plank");
-        System.out.println(p1.getFirstName());
+        logger.info("Got person {} from company {}", p1.getFirstName(), p1.getCompany());
 
         PersonRecord p2 = db.getPersonByLastName("Golt");
-        System.out.println(p2.getFirstName());
+        logger.info("Got person {} from university {}", p2.getFirstName(), p2.getUniversity());
 
         PersonRecord p3 = db.getPersonByLastName("Irnis");
-        System.out.println(p3.getFirstName());
-
-        logger.error("Did it again!");
-        logger.info("Hello this is an info message");
-
+        logger.info("Got in person {} with ID {}", p3.getFirstName(), p3.getId());
 
         System.out.println("done");
 

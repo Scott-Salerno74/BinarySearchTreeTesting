@@ -1,0 +1,15 @@
+2019-02-13 08:24:56.294 [main] INFO  UserInterface.Main - Done filling tree
+2019-02-13 08:24:56.315 [main] DEBUG UserInterface.Main - Binary Tree has 100 entries
+2019-02-13 08:24:56.316 [main] ERROR UserInterface.Main - The person is NULL!
+2019-02-13 08:24:56.317 [main] DEBUG UserInterface.Main - Object is NULL
+2019-02-13 08:24:56.317 [main] ERROR UserInterface.Main - Did not find person!
+2019-02-13 08:24:56.317 [main] DEBUG UserInterface.Main - Returning person Philly with email pplank2o@opera.com
+2019-02-13 08:24:56.321 [main] INFO  UserInterface.Main - Got person Philly from company Browseblab
+2019-02-13 08:24:56.321 [main] DEBUG UserInterface.Main - Returning person Karlens with email kgolt20@buzzfeed.com
+2019-02-13 08:24:56.322 [main] INFO  UserInterface.Main - Got person Karlens from university Shanghai Ocean University
+2019-02-13 08:24:56.322 [main] DEBUG UserInterface.Main - Returning person Alvan with email airnis2r@pagesperso-orange.fr
+2019-02-13 08:24:56.322 [main] INFO  UserInterface.Main - Got in person Alvan with ID 100
+2019-02-13 08:25:33.001 [JavaFX Application Thread] DEBUG UserInterface.Main - Returning person Philly with email pplank2o@opera.com
+2019-02-13 08:25:38.666 [JavaFX Application Thread] DEBUG UserInterface.Main - Returning person Kristen with email kmaciak22@wikipedia.org
+2019-02-13 08:25:44.627 [JavaFX Application Thread] DEBUG UserInterface.Main - Returning person Sax with email scanizares28@unesco.org
+2019-02-13 08:26:39.146 [JavaFX Application Thread] INFO  UserInterface.Main - Inserting record into tree: 101 Denis Halilovic something@lvc.edu TikTok Sensai LVC 
