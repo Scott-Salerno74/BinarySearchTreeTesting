@@ -32,3 +32,18 @@ With Intellij, J-unit 5 is available withthe newest Version. I Used JUnit 5 to c
 To Create a Test in IntelliJ, You must click on the name of the class You are looking to test. Once it is Highlighted, Press Alt+Enter and you are given the Option to create a test. From There you create a test with the testing material you want and for us it was Junit. 
 From There You import the Junit material and go ahead. 
 Assertions in Junit help to find problems when testing the code.
+
+
+## LOG4J
+
+1. Create resources folder.  Put log4j2-test.json in that folder.
+2. Right click project
+3. Project Strucutre
+4. Click Resourcs Folder
+5. Click 'Sources' above
+6. 'Resources' should be listed under 'Source Folders' to the right.
+
+More about configuration: http://logging.apache.org/log4j/2.x/manual/configuration.html
+
+
+

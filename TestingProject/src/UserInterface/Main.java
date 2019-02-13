@@ -24,9 +24,14 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import java.util.ArrayList;
 
 public class Main extends Application {
+
+    static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     Stage stage;
     static Database db;
@@ -381,8 +386,11 @@ public class Main extends Application {
         PersonRecord p3 = db.getPersonByLastName("Irnis");
         System.out.println(p3.getFirstName());
 
+        logger.error("Did it again!");
+
+
         System.out.println("done");
 
-        launch(args);
+        // launch(args);
     }
 }
