@@ -2,7 +2,28 @@
 Practicing Testing Using Tools Like Mockito, JUnit , and Log4j with Search Tree, UI, and Data Bases
 
 
-Things to make sure of if project isn't running
+## Opening the project for the first time
+
+Intellij > File > Open > TestingProject (If BinarySearchTreeTesting is the root folder in the project explorer, the project probably won't work)
+
+
+Maven popup will appear at bottom right of screen > 'Import Changes'
+
+
+Now we have to add the Main class to the configuration
+- Go to src/UserInterface/Main
+- Go to Main method at the bottom of the file
+- Right click Method > Run 
+
+
+If its still not working ...
+
+File > Project Structure 
+- In the 'Sources' Tab, make sure that on the right side of  the screen, 'src' and 'Resources' are listed under 'Source Folders'
+  - If not select the folder, and click on 'Sources' above, where it says 'Mark as:'
+
+
+## Things to make sure of if project isn't running
 
 1. Make sure that 'src' folder is marked as root
    - Right click TestingProject/src > 'Mark directory as Root'
@@ -13,13 +34,6 @@ Things to make sure of if project isn't running
        - Project Language Level -> SDK default (8 - Lambdas, type annotations, etc)
        - Project Compiler Output -> TestingProject/out
 
-## Opening the project for the first time
-
-Intellij > File > Open > TestingProject (If BinarySearchTreeTesting is the root folder in the project explorer, the project probably won't work)
-
-File > Project Structure 
-- In the 'Sources' Tab, make sure that on the right side of  the screen, 'src' and 'Resources' are listed under 'Source Folders'
-  - If not select the folder, and click on 'Sources' above, where it says 'Mark as:'
 
 ## Setting up Maven (IntelliJ has Maven installed so you actually don't need to do this)
 
