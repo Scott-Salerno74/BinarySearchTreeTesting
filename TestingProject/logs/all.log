@@ -1,0 +1,29 @@
+2019-02-13 08:39:25.342 [main] INFO  UserInterface.Main - Done filling tree
+2019-02-13 08:39:25.354 [main] DEBUG UserInterface.Main - Binary Tree has 100 entries
+2019-02-13 08:39:25.355 [main] DEBUG UserInterface.Main - In BinarySearchTree.java, person record is null
+2019-02-13 08:39:25.355 [main] ERROR UserInterface.Main - The person is NULL!
+2019-02-13 08:39:25.355 [main] DEBUG UserInterface.Main - Object is NULL
+2019-02-13 08:39:25.355 [main] ERROR UserInterface.Main - Did not find person!
+2019-02-13 08:39:25.365 [main] DEBUG UserInterface.Main - Returning person Philly with email pplank2o@opera.com
+2019-02-13 08:39:25.368 [main] INFO  UserInterface.Main - Got person Philly from company Browseblab
+2019-02-13 08:39:25.368 [main] DEBUG UserInterface.Main - Returning person Karlens with email kgolt20@buzzfeed.com
+2019-02-13 08:39:25.369 [main] INFO  UserInterface.Main - Got person Karlens from university Shanghai Ocean University
+2019-02-13 08:39:25.369 [main] DEBUG UserInterface.Main - Returning person Alvan with email airnis2r@pagesperso-orange.fr
+2019-02-13 08:39:25.373 [main] INFO  UserInterface.Main - Got in person Alvan with ID 100
+2019-02-13 08:40:07.689 [JavaFX Application Thread] INFO  UserInterface.Main - User is searching for Hutfield 
+2019-02-13 08:40:07.690 [JavaFX Application Thread] DEBUG UserInterface.Main - Returning person Hernando with email hhutfield1q@indiatimes.com
+2019-02-13 08:40:16.269 [JavaFX Application Thread] INFO  UserInterface.Main - User is searching for Bedome 
+2019-02-13 08:40:16.270 [JavaFX Application Thread] DEBUG UserInterface.Main - Returning person Eloise with email ebedome24@unc.edu
+2019-02-13 08:40:22.582 [JavaFX Application Thread] INFO  UserInterface.Main - User is searching for MacCosto 
+2019-02-13 08:40:22.582 [JavaFX Application Thread] DEBUG UserInterface.Main - Returning person Orren with email omaccosto1y@usnews.com
+2019-02-13 08:40:37.478 [JavaFX Application Thread] INFO  UserInterface.Main - User is searching for D'Hooge 
+2019-02-13 08:40:37.479 [JavaFX Application Thread] DEBUG UserInterface.Main - Returning person Guendolen with email gdhooge3@boston.com
+2019-02-13 08:40:45.972 [JavaFX Application Thread] INFO  UserInterface.Main - User is searching for Phillips 
+2019-02-13 08:40:45.973 [JavaFX Application Thread] DEBUG UserInterface.Main - In BinarySearchTree.java, person record is null
+2019-02-13 08:40:45.973 [JavaFX Application Thread] ERROR UserInterface.Main - The person is NULL!
+2019-02-13 08:41:32.336 [JavaFX Application Thread] INFO  UserInterface.Main - Inserting record into tree: 101 Logan Phillips lmp004@lvc.edu Epic Games Creator of Fortnite Lebanon Valley College 
+2019-02-13 08:41:34.247 [JavaFX Application Thread] INFO  UserInterface.Main - User is searching for Phillips 
+2019-02-13 08:41:34.247 [JavaFX Application Thread] DEBUG UserInterface.Main - Returning person Logan with email lmp004@lvc.edu
+2019-02-13 08:42:19.039 [JavaFX Application Thread] INFO  UserInterface.Main - Inserting record into tree: 102 Dennis Halilovic something@lvc.edu TikTok Sensai LVC 
+2019-02-13 08:42:29.485 [JavaFX Application Thread] INFO  UserInterface.Main - User is searching for Halilovic 
+2019-02-13 08:42:29.485 [JavaFX Application Thread] DEBUG UserInterface.Main - Returning person Dennis with email something@lvc.edu

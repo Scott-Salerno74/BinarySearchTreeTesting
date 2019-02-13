@@ -8,10 +8,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,9 +22,14 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+
 import java.util.ArrayList;
 
 public class Main extends Application {
+
+    static final Logger logger = LogManager.getLogger(Main.class.getName());
 
     Stage stage;
     static Database db;
@@ -59,12 +62,7 @@ public class Main extends Application {
 
         ObservableList<String> options =
                 FXCollections.observableArrayList(
-                        "First Name",
-                        "Last Name",
-                        "E-mail",
-                        "Company",
-                        "Job Title",
-                        "University"
+                        "Last Name"
                 );
 
         final ComboBox searchFilter = new ComboBox(options);
@@ -77,7 +75,6 @@ public class Main extends Application {
         userTextField.setId("textField");
         // Add a text field to the grid pane at column 1, row 1
         grid.add(userTextField, 0, 1);
-
    
         Button searchBtn = new Button("Search");
         Button clearBtn = new Button("Clear");
@@ -93,26 +90,8 @@ public class Main extends Application {
         // Add the HBox pane to the grid in column 1, row 4
         grid.add(hbBtn, 0, 4);
 
-
-        //grid.setGridLinesVisible(true);
-
         final Text actiontarget = new Text();
         grid.add(actiontarget, 1, 6);
-
-
-
-        clearBtn.setOnAction(new EventHandler<ActionEvent>() {
-            public void handle(ActionEvent event) {
-                userTextField.clear();
-                searchFilter.getSelectionModel().clearSelection();
-                searchFilter.getSelectionModel().selectFirst();
-                userTextField.setPromptText("John...");
-
-            }
-        });
-
-///////////////
-
         final TableView table = new TableView();
         table.setMinHeight(150);
 
@@ -156,6 +135,68 @@ public class Main extends Application {
 
         grid.add(hbBtn2, 0, 6);
 
+
+        final TextField firstNameTextField = new TextField();
+        final TextField lastNameTextField = new TextField();
+        final TextField emailTextField = new TextField();
+        final TextField companyTextField = new TextField();
+        final TextField jobTitleTextField = new TextField();
+        final TextField universityTextField = new TextField();
+
+        firstNameTextField.setPromptText("First name...");
+        lastNameTextField.setPromptText("Last name...");
+        emailTextField.setPromptText("Email...");
+        companyTextField.setPromptText("Company...");
+        jobTitleTextField.setPromptText("Job Title...");
+        universityTextField.setPromptText("University...");
+
+        firstNameTextField.setMaxWidth(100);
+        lastNameTextField.setMaxWidth(100);
+        emailTextField.setMaxWidth(100);
+        companyTextField.setMaxWidth(100);
+        jobTitleTextField.setMaxWidth(100);
+        universityTextField.setMaxWidth(100);
+
+        HBox row1 = new HBox();
+        HBox row2 = new HBox();
+        row1.getChildren().addAll(firstNameTextField, lastNameTextField, emailTextField);
+        row2.getChildren().addAll(companyTextField, jobTitleTextField, universityTextField);
+        grid.addRow(16, row1);
+        grid.addRow(17, row2);
+
+        Button insert = new Button("Insert");
+        HBox insertBox = new HBox(10);
+        insertBox.setAlignment(Pos.BOTTOM_LEFT);
+        insertBox.getChildren().add(insert);
+        grid.addRow(18, insertBox);
+
+        /*
+        final TextField deleteUserTextField = new TextField();
+        deleteUserTextField.setPromptText("Delete user by last name...");
+        deleteUserTextField.setMaxWidth(300);
+        HBox deleteUserRow = new HBox(10);
+        deleteUserRow.getChildren().add(deleteUserTextField);
+        grid.addRow(19, deleteUserRow);
+        Button delete = new Button("Delete");
+        HBox deleteBox = new HBox(100);
+        deleteBox.setAlignment(Pos.BOTTOM_LEFT);
+        deleteBox.getChildren().add(delete);
+        grid.addRow(20, deleteBox);
+        */
+
+        //---------------------- EVENT HANDLERS -------------------------------
+
+        clearBtn.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                userTextField.clear();
+                searchFilter.getSelectionModel().clearSelection();
+                searchFilter.getSelectionModel().selectFirst();
+                userTextField.setPromptText("John...");
+
+            }
+        });
+
+
         clearTableBtn.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 table.getItems().clear();
@@ -168,27 +209,33 @@ public class Main extends Application {
                 actiontarget.setFill(Color.FIREBRICK);
                 actiontarget.setText("Search button pressed");
                 String searchText = userTextField.getText();
-                //PersonRecord personToSearch = db.getPersonByLastName(searchText));
-                System.out.println("User is searching for " + searchText );
+                logger.info("User is searching for {} ", searchText);
+
                 PersonRecord found = db.getPersonByLastName(searchText);
-                System.out.println(found.getFirstName());
-                System.out.println(found.toString());
 
-                userTextField.clear();
-                searchFilter.getSelectionModel().select(1);
+                if(found == null) {
 
-                table.getItems().add(found);
+                    table.getItems().add(new PersonRecord("DNE", "DNE", "DNE", "DNE", "DNE", "DNE", "DNE"));
+
+                } else {
+                    System.out.println(found.getFirstName());
+                    System.out.println(found.toString());
+
+                    userTextField.clear();
+                    searchFilter.getSelectionModel().select(1);
+
+                    table.getItems().add(found);
+                }
+
+
+
 
             }
         });
 
-
-        ///////////////
-
         searchFilter.setOnAction(new EventHandler<ActionEvent>() {
             public void handle(ActionEvent event) {
                 int selectedIndex = searchFilter.getSelectionModel().getSelectedIndex();
-                //String choice = (String) searchFilter.getItems().get(selectedIndex);
 
                 String choice = "";
 
@@ -220,71 +267,11 @@ public class Main extends Application {
                 }
 
                 System.out.println(choice);
-
-
-                // first name, last name, e-mail, company, job title, university
-
-                // userTextField.setPromptText("");
-
-
-
             }
         });
 
-        final TextField firstNameTextField = new TextField();
-        final TextField lastNameTextField = new TextField();
-        final TextField emailTextField = new TextField();
-        final TextField companyTextField = new TextField();
-        final TextField jobTitleTextField = new TextField();
-        final TextField universityTextField = new TextField();
-
-        firstNameTextField.setPromptText("First name...");
-        lastNameTextField.setPromptText("Last name...");
-        emailTextField.setPromptText("Email...");
-        companyTextField.setPromptText("Company...");
-        jobTitleTextField.setPromptText("Job Title...");
-        universityTextField.setPromptText("University...");
-
-
-        firstNameTextField.setMaxWidth(100);
-        lastNameTextField.setMaxWidth(100);
-        emailTextField.setMaxWidth(100);
-        companyTextField.setMaxWidth(100);
-        jobTitleTextField.setMaxWidth(100);
-        universityTextField.setMaxWidth(100);
-
-
-        HBox row1 = new HBox();
-        HBox row2 = new HBox();
-        row1.getChildren().addAll(firstNameTextField, lastNameTextField, emailTextField);
-        row2.getChildren().addAll(companyTextField, jobTitleTextField, universityTextField);
-        grid.addRow(16, row1);
-        grid.addRow(17, row2);
-
-        Button insert = new Button("Insert");
-        HBox insertBox = new HBox(10);
-        insertBox.setAlignment(Pos.BOTTOM_LEFT);
-        insertBox.getChildren().add(insert);
-        grid.addRow(18, insertBox);
-
-        final TextField deleteUserTextField = new TextField();
-        deleteUserTextField.setPromptText("Delete user by last name...");
-        deleteUserTextField.setMaxWidth(300);
-        HBox deleteUserRow = new HBox(10);
-        deleteUserRow.getChildren().add(deleteUserTextField);
-        grid.addRow(19, deleteUserRow);
-
-        Button delete = new Button("Delete");
-        HBox deleteBox = new HBox(100);
-        deleteBox.setAlignment(Pos.BOTTOM_LEFT);
-        deleteBox.getChildren().add(delete);
-        grid.addRow(20, deleteBox);
-
-
         insert.setOnAction(new EventHandler<ActionEvent>() {
              public void handle(ActionEvent event) {
-
-                 System.out.println("Inserting...");
 
                  String id = Integer.toString(db.getNumberOfRecordsInTree() + 1);
                  String firstName = firstNameTextField.getText();
@@ -295,10 +282,7 @@ public class Main extends Application {
                  String university = universityTextField.getText();
 
                  PersonRecord toAdd = new PersonRecord(id, firstName, lastName, email, company, jobTitle, university);
-                 System.out.println("Inserting record into tree: " + toAdd.toString());
-
-
-
+                 logger.info("Inserting record into tree: {} ", toAdd.toString());
 
                  firstNameTextField.clear();
                  lastNameTextField.clear();
@@ -312,43 +296,6 @@ public class Main extends Application {
              }
          });
 
-        /*
-        firstNameTextField.setMaxWidth(100);
-        companyTextField.setMaxWidth(100);
-        lastNameTextField.setMaxWidth(100);
-
-
-        Label add = new Label("Add a record...");
-        grid.add(add, 1, 14);
-
-        //insertBox.getChildren().addAll(firstNameTextField, lastNameTextField, emailTextField, companyTextField, jobTitleTextField, universityTextField);
-
-        //grid.add(insertBox, 1, 16);
-
-        grid.add(firstNameTextField, 1, 16);
-        grid.add(lastNameTextField, 2, 16);
-        grid.add(emailTextField, 3, 16);
-        grid.add(companyTextField, 1, 17);
-        grid.add(jobTitleTextField, 2, 17);
-        grid.add(universityTextField, 3, 17);
-        */
-/////
-
-       // grid.add(add, 1,8);
-
-        /*
-
-        Label firstNameLabel = new Label("First name");
-        grid.add(firstNameLabel, 2, 15 );
-        grid.add(firstNameTextField, 2, 15);
-        grid.add(lastNameTextField, 3, 15);
-        grid.add(emailTextField, 4, 15);
-        grid.add(companyTextField, 5, 15);
-        grid.add(jobTitleTextField, 6, 15);
-        grid.add(universityTextField, 7, 15);
-
-*/
-
         Scene scene = new Scene(grid, 750, 600);
         primaryStage.setScene(scene);
     }
@@ -359,27 +306,32 @@ public class Main extends Application {
         db = new Database();
         CSVReader reader = new CSVReader();
         ArrayList<PersonRecord> records = reader.getAllDataFromCSVFile();
-        //System.out.println(records.size());
         db.fillBinaryTreeWithAllRecords(records);
-        System.out.println(db.getNumberOfRecordsInTree());
 
-        //PersonRecord found = db.getPersonByLastName("Fumagallito");
+        logger.debug("Binary Tree has {} entries", db.getNumberOfRecordsInTree());
+
+        PersonRecord foundError = db.getPersonByLastName("Fumagallito");
+
+        if(foundError == null) {
+            logger.debug("Object is NULL");
+        }
 
         boolean found = db.containsPersonByLastName("Plank");
 
         if(found)
-            System.out.println("Found the person");
-        else
-            System.out.println("did not find the person");
+            logger.info("Found the person");
+        else {
+            logger.error("Did not find person!");
+        }
 
         PersonRecord p1 = db.getPersonByLastName("Plank");
-        System.out.println(p1.getFirstName());
+        logger.info("Got person {} from company {}", p1.getFirstName(), p1.getCompany());
 
         PersonRecord p2 = db.getPersonByLastName("Golt");
-        System.out.println(p2.getFirstName());
+        logger.info("Got person {} from university {}", p2.getFirstName(), p2.getUniversity());
 
         PersonRecord p3 = db.getPersonByLastName("Irnis");
-        System.out.println(p3.getFirstName());
+        logger.info("Got in person {} with ID {}", p3.getFirstName(), p3.getId());
 
         System.out.println("done");
 
