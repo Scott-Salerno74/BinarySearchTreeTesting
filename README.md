@@ -21,7 +21,7 @@ File > Project Structure
 - In the 'Sources' Tab, make sure that on the right side of  the screen, 'src' and 'Resources' are listed under 'Source Folders'
   - If not select the folder, and click on 'Sources' above, where it says 'Mark as:'
 
-
+## Setting up Maven (IntelliJ has Maven installed so you actually don't need to do this)
 
 ON MAC:
 
