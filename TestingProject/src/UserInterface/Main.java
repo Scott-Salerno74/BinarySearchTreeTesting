@@ -175,14 +175,25 @@ public class Main extends Application {
                 String searchText = userTextField.getText();
                 //PersonRecord personToSearch = db.getPersonByLastName(searchText));
                 System.out.println("User is searching for " + searchText );
+
                 PersonRecord found = db.getPersonByLastName(searchText);
-                System.out.println(found.getFirstName());
-                System.out.println(found.toString());
 
-                userTextField.clear();
-                searchFilter.getSelectionModel().select(1);
+                if(found == null) {
 
-                table.getItems().add(found);
+                    table.getItems().add(new PersonRecord("DNE", "DNE", "DNE", "DNE", "DNE", "DNE", "DNE"));
+
+                } else {
+                    System.out.println(found.getFirstName());
+                    System.out.println(found.toString());
+
+                    userTextField.clear();
+                    searchFilter.getSelectionModel().select(1);
+
+                    table.getItems().add(found);
+                }
+
+
+
 
             }
         });
@@ -387,10 +398,11 @@ public class Main extends Application {
         System.out.println(p3.getFirstName());
 
         logger.error("Did it again!");
+        logger.info("Hello this is an info message");
 
 
         System.out.println("done");
 
-        // launch(args);
+        launch(args);
     }
 }

@@ -3,10 +3,19 @@ package DatabaseServices;
 import BinaryTree.BinarySearchTree;
 import BinaryTree.Node;
 import Models.PersonRecord;
+import UserInterface.Main;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 
+
+
 public class Database {
+
+    static final Logger logger = LogManager.getLogger(Main.class.getName());
+
+
 
     //private ArrayList<PersonRecord> data;
     private BinarySearchTree dataTree;
@@ -28,7 +37,13 @@ public class Database {
 
         if(personToReturn == null) {
             System.out.println("NULL FROM SEARCH!!!");
+            return null;
         }
+
+
+        logger.debug("Logging in person {} with email {}", personToReturn.getFirstName(), personToReturn.getEmail());
+
+
 
         return personToReturn;
 
