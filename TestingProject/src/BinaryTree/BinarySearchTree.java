@@ -27,7 +27,7 @@ public class BinarySearchTree {
 
     private int size(Node node) {
         if(node == null) {
-            logger.debug("The tree is empty");
+            //logger.debug("The tree is empty");
             return 0;
         } else {
             return(size(node.left) + 1 + size(node.right));
@@ -47,7 +47,7 @@ public class BinarySearchTree {
     private Node add(Node current, PersonRecord person) {
 
         if(current == null) {
-            logger.info("In BinarySearchTree.java, in base case for add()");
+            //logger.info("In BinarySearchTree.java, in base case for add()");
             return new Node(person);
         }
 
