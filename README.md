@@ -1,6 +1,7 @@
 # BinarySearchTreeTesting
 Practicing Testing Using Tools Like Mockito, JUnit , and Log4j with Search Tree, UI, and Data Bases
 
+
 Things to make sure of if project isn't running
 
 1. Make sure that 'src' folder is marked as root
@@ -12,7 +13,15 @@ Things to make sure of if project isn't running
        - Project Language Level -> SDK default (8 - Lambdas, type annotations, etc)
        - Project Compiler Output -> TestingProject/out
 
-## Using Maven to Install dependencies
+## Opening the project for the first time
+
+Intellij > File > Open > TestingProjec (If BinarySearchTreeTesting is the root folder in the project explorer, the project probably won't work)
+
+File > Project Structure 
+- In the 'Sources' Tab, make sure that on the right side of  the screen, 'src' and 'Resources' are listed under 'Source Folders'
+  - If not select the folder, and click on 'Sources' above, where it says 'Mark as:'
+
+
 
 ON MAC:
 
